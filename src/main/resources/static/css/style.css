@@ -30,6 +30,8 @@ body {
 }
 
 .navbar-collapse {
+    justify-content: flex-end; /* Align items to the right by default */
+    text-align: right; /* Align text properly inside the collapse */
     transition: max-height 0.3s ease; /* Smooth collapsing effect */
 }
 
@@ -109,5 +111,13 @@ body {
 
     .navbar-nav .nav-link {
         font-size: 1rem;
+    }
+}
+
+/* For smaller screens (mobile) */
+@media (max-width: 768px) {
+    .navbar-collapse {
+        justify-content: flex-start !important; /* Align items to the left */
+        text-align: left; /* Align text properly inside the collapse */
     }
 }
