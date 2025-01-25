@@ -1,10 +1,113 @@
-body{
-    background-color: #e2e2e2!important;
+/* General body styling */
+body {
+    margin: 0;
+    padding-bottom:12px;
+    background-color: #e2e2e2 !important;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    padding-top: 56px; /* Adjust for fixed navbar height */
+    scroll-behavior: smooth; /* Enable smooth scrolling */
 }
 
-.my-card{
+/* Navbar styling */
+.navbar {
+    position: fixed; /* Fix the navbar at the top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #009688 !important; /* Custom primary color */
+    z-index: 10; /* Ensure navbar stays on top */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.navbar-toggler {
+    outline: none;
+    border: none; /* Remove border */
+}
+
+.navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.navbar-collapse {
+    transition: max-height 0.3s ease; /* Smooth collapsing effect */
+}
+
+.navbar-nav {
+    margin-left: 0; /* Restore alignment to the left */
+}
+
+.navbar-nav .nav-link {
+    color: white !important;
+    padding: 10px;
+    font-size: 1.1rem;
+    text-align: left; /* Ensure left alignment of text */
+}
+
+/* Banner styling */
+.banner {
+    width: 100%;
+    height: calc(100vh - 56px); /* Full viewport height minus navbar height */
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../images/banner3.avif);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in height/width */
+    margin: 0; /* Remove default margins */
+}
+
+/* Banner heading */
+.banner h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+/* Banner paragraph */
+.banner p {
+    font-size: 1.1rem;
+    max-width: 90%;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* Card styling */
+.my-card {
     margin-top: 100px;
     padding: 20px;
     background-color: #ffffff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 8px; /* Smooth corners */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animations */
+}
+
+.my-card:hover {
+    transform: translateY(-10px); /* Lift the card slightly on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Add hover effect */
+}
+
+/* Responsive styling for smaller devices */
+@media (max-width: 768px) {
+    .banner {
+        height: calc(100vh - 56px); /* Maintain full height minus navbar */
+    }
+
+    .banner h1 {
+        font-size: 1.8rem;
+    }
+
+    .banner p {
+        font-size: 1rem;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 1rem;
+    }
 }

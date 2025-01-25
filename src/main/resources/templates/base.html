@@ -21,8 +21,6 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-      integrity="sha384-dyBjKn5tOT3kzscosWhLkMdWjxBe3CLQj/dGzTqlVnQIPONr2nsbWmQKmKvmt5FD"
-      crossorigin="anonymous"
     />
 
     <link rel="stylesheet" th:href="@{/css/style.css}" />
@@ -31,12 +29,13 @@
     <title th:text="${title}">base html</title>
   </head>
   <body>
-    <!--this is navbar section-->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-light">
+    <nav class="navbar navbar-expand-lg bg-primary text-white">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Smart Contact Manager</a>
+        <!-- Logo -->
+        <a class="navbar-brand text-white" href="#">Smart Contact Manager</a>
+        <!-- Toggler -->
         <button
-          class="navbar-toggler"
+          class="navbar-toggler border-0"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -44,32 +43,44 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <i class="fas fa-bars" style="color: black"></i>
-          <!-- Custom toggle icon -->
+          <i class="fas fa-bars text-white"></i>
         </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto">
+        <!-- Navbar Collapse -->
+        <div
+          class="collapse navbar-collapse ms-auto"
+          id="navbarSupportedContent"
+        >
+          <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link text-white active" href="#">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link text-white" href="#">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Login</a>
+              <a class="nav-link text-white" href="#">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-disabled="true">Signup</a>
+              <a class="nav-link text-white" href="#">Signup</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-
     <!--end of the navbar section-->
+
     <!--this is body section-->
     <div th:replace="${content}"></div>
+    <!-- Content-->
+    <div class="my-card">
+      <h2>Contact List</h2>
+      <p>Here is where you can manage your saved contacts.</p>
+    </div>
+
+    <div class="my-card">
+      <h2>Add New Contact</h2>
+      <p>Fill in the form to add a new contact to your list.</p>
+    </div>
     <!--end of the body section-->
 
     <!--this is footer section-->
@@ -78,9 +89,7 @@
 
     <!--custom java script file link-->
     <script th:src="@{/js/script.js}"></script>
-    <!-- Optional JavaScript; choose one of the two! -->
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
