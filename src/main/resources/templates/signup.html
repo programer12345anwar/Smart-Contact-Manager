@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::Layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+</head>
+<body>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="my-card mt-2">
+                        <h1 class="text-center">Register Here!!</h1>
+
+                        <form th:action="@{/do_register}" method="post"  >
+                            <!-- Name field -->
+                            <div class="form-group">
+                                <label for="name_field" class="form-label">Enter Your Name</label>
+                                <input type="text" class="form-control" id="name_field"   placeholder="Enter here" required />
+                            </div>
+
+                            <!-- Email field -->
+                            <div class="form-group">
+                                <label for="email_field" class="form-label">Enter Your Email</label>
+                                <input type="email" class="form-control" id="email_field"   placeholder="Enter here" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
+                            </div>
+
+                            <!-- Password field -->
+                            <div class="form-group">
+                                <label for="password_field" class="form-label">Enter Your Password</label>
+                                <input type="password" class="form-control" id="password_field"  placeholder="Enter here" required />
+                            </div>
+
+                            <!-- About field -->
+                            <div class="form-group">
+                                <label for="about_field" class="form-label">Enter About You</label>
+                                <textarea class="form-control" rows="10" id="about_field"  placeholder="Enter about yourself" required></textarea>
+                            </div>
+
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                        </form> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

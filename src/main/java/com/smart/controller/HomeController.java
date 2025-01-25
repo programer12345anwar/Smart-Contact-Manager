@@ -20,6 +20,12 @@ public class HomeController {
         return "about";//about.html
     }
 
+    @GetMapping("/signup")
+    public String signup(Model model){
+        model.addAttribute("title","Register - Smart Contact Manager");
+        return "signup";//signup.html
+    }
+
     //=============================================
     // @Autowired
     // private UserRepository userRepository;
