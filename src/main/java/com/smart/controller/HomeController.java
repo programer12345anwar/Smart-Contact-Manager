@@ -5,13 +5,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.servlet.http.HttpSession;
+
 
 import com.smart.entities.User;
-
+import com.smart.helper.Message;
+import com.smart.repository.UserRepository;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping("/")
     public String home(Model model){
@@ -26,23 +34,49 @@ public class HomeController {
     }
 
     @GetMapping("/signup")
-    public String signup(Model model){
+    public String signup(Model model,HttpSession session){
         model.addAttribute("title","Register - Smart Contact Manager");
         model.addAttribute("user",new User());
+         // Clear message from session
+        session.removeAttribute("message");
+
         return "signup";//signup.html
     }
 
     //this handler is for registering a new user
 
     @PostMapping("/do_register")
-    public String registerUser(@ModelAttribute("user") User user ,@RequestParam(value = "agreement",defaultValue = "false") boolean agreement ,Model model){
+    public String registerUser(@ModelAttribute("user") User user ,@RequestParam(value = "agreement",defaultValue = "false") boolean agreement ,BindingResult result1,Model model,HttpSession session){
+
+
+       try{
         if(!agreement){
             System.out.println("You have not agreed the terms and condition");
+            throw new Exception("You have not agreed the terms and condition");
         }
+
+        if(result1.hasErrors()){
+            System.out.println("Error in registration");
+            model.addAttribute("user",user);
+            return "signup";
+        }
+        user.setRole("ROLE_USER");
+        user.setEnabled(true);
         System.out.println("Agreement "+agreement);
         System.out.println("user "+user);
+        User result= this.userRepository.save(user);
+        model.addAttribute("user",result);
+        session.setAttribute("message", new Message("Successfully registered !!","alert-success"));
+        return "signup";//signup.html
+       }
+       catch(Exception e){
+        e.printStackTrace();
         model.addAttribute("user",user);
+        session.setAttribute("message", new Message("Something went wrong !!"+e.getMessage(),"alert-danger"));
         return "signup";
+       }
+       
+         
     }
 
     //=============================================

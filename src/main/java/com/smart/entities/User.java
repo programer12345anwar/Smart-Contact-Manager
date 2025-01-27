@@ -12,6 +12,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "user")
@@ -20,16 +23,30 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @NotBlank
     private String name;
+
+    // @Size(min=5, max=12)
+    // @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).*")
+
+    @NotBlank
+    @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{5,12}", message="Password must be 5-12 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.")
     private String password;
 
     @Column(unique=true)
+    @NotBlank
+    @Pattern(regexp="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
     private String email;
+
+    
     private String imageUrl;
     private String role;
     private boolean enabled;
 
     @Column(length=500)
+    @NotBlank
+    @Size(min=5,max=200 , message="About must be 5-200 characters long")
     private String about;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy="user")
