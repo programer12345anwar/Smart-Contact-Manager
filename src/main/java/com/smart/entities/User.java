@@ -116,6 +116,22 @@ public class User {
         this.contacts = contacts;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", name='" + getName() + "'" +
+            ", password='" + getPassword() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", imageUrl='" + getImageUrl() + "'" +
+            ", role='" + getRole() + "'" +
+            ", enabled='" + isEnabled() + "'" +
+            ", about='" + getAbout() + "'" +
+            ", contacts='" + getContacts() + "'" +
+            "}";
+    }
+
+
 
 
 }

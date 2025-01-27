@@ -2,8 +2,13 @@ package com.smart.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
- import org.springframework.ui.Model;
+import com.smart.entities.User;
+
+import org.springframework.ui.Model;
 
 @Controller
 public class HomeController {
@@ -23,7 +28,21 @@ public class HomeController {
     @GetMapping("/signup")
     public String signup(Model model){
         model.addAttribute("title","Register - Smart Contact Manager");
+        model.addAttribute("user",new User());
         return "signup";//signup.html
+    }
+
+    //this handler is for registering a new user
+
+    @PostMapping("/do_register")
+    public String registerUser(@ModelAttribute("user") User user ,@RequestParam(value = "agreement",defaultValue = "false") boolean agreement ,Model model){
+        if(!agreement){
+            System.out.println("You have not agreed the terms and condition");
+        }
+        System.out.println("Agreement "+agreement);
+        System.out.println("user "+user);
+        model.addAttribute("user",user);
+        return "signup";
     }
 
     //=============================================

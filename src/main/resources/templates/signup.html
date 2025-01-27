@@ -7,42 +7,66 @@
 </head>
 <body>
     <section>
-        <div class="container mt-lg-4 ">
+        <div class="container mt-lg-3 ">
             <div class="row">
                 <div class="col-md-6 offset-md-3">
-                    <div class="my-card mt-2 ">
+                    <div class="my-card mt-1 ">
+
+                        <div class="container text-center">
+                            <img style="width: 70px;" src="" th:src="@{/images/register.png}" alt="logo">
+                        </div>
                         <h1 class="text-center">Register Here!!</h1>
 
-                        <form th:action="@{/do_register}" method="post"  >
+                        <form th:action="@{/do_register}" method="post" th:object="${user}" >
                             <!-- Name field -->
                             <div class="form-group">
                                 <label for="name_field" class="form-label">Enter Your Name</label>
-                                <input type="text" class="form-control" id="name_field"   placeholder="Enter here" required />
+                                <input
+                                 name="name" 
+                                th:value="${user.name}"
+                                 type="text" class="form-control" id="name_field"   placeholder="Enter here" required />
+                                 <!--name should be matched with entity attribute like name="name" -->
                             </div>
 
                             <!-- Email field -->
                             <div class="form-group">
                                 <label for="email_field" class="form-label">Enter Your Email</label>
-                                <input type="email" class="form-control" id="email_field"   placeholder="Enter here" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
+                                <input type="email"
+                                name="email"
+                                th:value="${user.email}"
+                                 class="form-control" id="email_field"   placeholder="Enter here" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
                             </div>
 
                             <!-- Password field -->
                             <div class="form-group">
                                 <label for="password_field" class="form-label">Enter Your Password</label>
-                                <input type="password" class="form-control" id="password_field"  placeholder="Enter here" required />
+                                <input  type="password"
+                                name="password" 
+                               
+                                 class="form-control" id="password_field"  placeholder="Enter here" required />
                             </div>
 
                             <!-- About field -->
                             <div class="form-group">
                                 <label for="about_field" class="form-label">Enter About You</label>
-                                <textarea class="form-control" rows="5" id="about_field"  placeholder="Enter about yourself" required></textarea>
+                                <textarea
+                                name="about"
+                                th:text="${user.about}"
+                                class="form-control" rows="5" id="about_field"  placeholder="Enter about yourself" required></textarea>
+                            </div>
+
+                            <!--terms input field-->
+                            <div class="form-group form-check m-1">
+                                <input type="checkbox" name="agreement" class="form-check-input" id="terms_field" >
+                                <!--you can use hrere required or you can validate in the controller if not accepted then redirect to signup page with the inserted data-->
+                                <label class="form-check-label" for="terms_field">Accept terms and conditions</label>
                             </div>
 
                              <!-- Submit and Reset buttons -->
-<div class="container text-center ">
-    <button type="submit" class="btn bg-primary text-white mt-3 w-100">Submit</button>
-    <button type="reset" class="btn bg-warning text-white mt-3 w-100">Reset</button>
-  </div>
+                            <div class="container text-center ">
+                                <button type="submit" class="btn bg-primary text-white mt-2 w-100">Submit</button>
+                                <button type="reset" class="btn bg-warning text-white mt-2 w-100">Reset</button>
+                            </div>
   
                         </div>
                         </form> 
