@@ -7,10 +7,10 @@
 </head>
 <body>
     <section>
-        <div class="container">
+        <div class="container mt-lg-4 ">
             <div class="row">
                 <div class="col-md-6 offset-md-3">
-                    <div class="my-card mt-2">
+                    <div class="my-card mt-2 ">
                         <h1 class="text-center">Register Here!!</h1>
 
                         <form th:action="@{/do_register}" method="post"  >
@@ -35,14 +35,15 @@
                             <!-- About field -->
                             <div class="form-group">
                                 <label for="about_field" class="form-label">Enter About You</label>
-                                <textarea class="form-control" rows="10" id="about_field"  placeholder="Enter about yourself" required></textarea>
+                                <textarea class="form-control" rows="5" id="about_field"  placeholder="Enter about yourself" required></textarea>
                             </div>
 
-                            <!-- Submit button -->
-                             <div class="container">
-                            <button type="submit" class="btn bg-primary text-white mt-3">Submit</button>
-
-                            <button type="submit" class="btn bg-primary text-white mt-3">Reset</button>
+                             <!-- Submit and Reset buttons -->
+<div class="container text-center ">
+    <button type="submit" class="btn bg-primary text-white mt-3 w-100">Submit</button>
+    <button type="reset" class="btn bg-warning text-white mt-3 w-100">Reset</button>
+  </div>
+  
                         </div>
                         </form> 
                     </div>
