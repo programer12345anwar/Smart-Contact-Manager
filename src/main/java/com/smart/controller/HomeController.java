@@ -69,8 +69,8 @@ public class HomeController {
     //this handler is for registering a new user
 
     @PostMapping("/do_register")
-    public String registerUser(@Valid @ModelAttribute("user") User user ,@RequestParam(value = "agreement",defaultValue = "false") boolean agreement ,BindingResult result1,Model model,HttpSession session){
-
+    public String registerUser(@Valid @ModelAttribute("user") User user ,BindingResult result1,Model model,@RequestParam(value = "agreement",defaultValue = "false") boolean agreement ,HttpSession session){
+    		/* */
 
        try{
         if(!agreement){
@@ -80,16 +80,20 @@ public class HomeController {
 
         if(result1.hasErrors()){
             System.out.println("Error in registration");
-            System.out.println(result1);
+            System.out.println("ERROR"+ result1.toString());
             model.addAttribute("user",user);
             return "signup";
         }
         
         user.setRole("ROLE_USER");
         user.setEnabled(true);
+        user.setImageUrl("default.png");
+        
+        
         System.out.println("Agreement "+agreement);
         System.out.println("user "+user);
         User result= this.userRepository.save(user);
+     
         System.out.println(result);
         model.addAttribute("user",result);
         session.setAttribute("message", new Message("Successfully registered !!","alert-success"));
@@ -99,7 +103,7 @@ public class HomeController {
        catch(Exception e){
         e.printStackTrace();
         model.addAttribute("user",user);
-        session.setAttribute("message", new Message("Something went wrong !!"+e.getMessage(),"alert-danger"));
+        session.setAttribute("message", new Message("Something went wrong !! " ,"alert-danger"));
         return "signup";
        }
        

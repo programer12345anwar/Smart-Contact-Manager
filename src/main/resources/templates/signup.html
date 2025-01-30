@@ -25,25 +25,28 @@
 						</div>
 						<h1 class="text-center">Register Here!!</h1>
 
-						<form th:action="@{/do_register}" method="post"
-							th:object="${user}">
+						<form novalidate="novalidate" th:action="@{/do_register}"
+							method="post" th:object="${user}">
+
+
+
 							<!-- Name Field -->
 							<div class="form-group">
 								<label for="name_field" class="form-label">Enter Your
 									Name</label> <input name="name" type="text" class="form-control"
-									th:value="${user.name}"
-									th:classappend="${#fields.hasErrors('name')?'is-invalid':''}"
-									id="name_field" placeholder="Enter here" />
+									th:Classappend="${#fields.hasErrors('name')?'is-invalid':''}"
+									id="name_field" placeholder="Enter here"
+									th:value="${user.name}" />
 
-								<div th:each="error : ${#fields.errors('name')}"
-									th:text="${error}" class="invalid-feedback"></div>
+								<div class="invalid-feedback"
+									th:each="error : ${#fields.errors('name')}" th:text="${error}"></div>
 							</div>
 
 							<!-- Email Field -->
 							<div class="form-group">
 								<label for="email_field" class="form-label">Enter Your
 									Email</label> <input type="email" name="email" th:value="${user.email}"
-									th:classappend="${#fields.hasErrors('email')?'is-invalid':''}"
+									th:Classappend="${#fields.hasErrors('email')?'is-invalid':''}"
 									class="form-control" id="email_field" placeholder="Enter here"
 									pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
 
@@ -57,7 +60,7 @@
 									Your Password</label> <input type="password" name="password"
 									class="form-control" id="password_field"
 									th:value="${user.password}"
-									th:classappend="${#fields.hasErrors('password')?'is-invalid':''}"
+									th:Classappend="${#fields.hasErrors('password')?'is-invalid':''}"
 									placeholder="Enter here" />
 
 								<div th:each="error : ${#fields.errors('password')}"
@@ -70,7 +73,7 @@
 									You</label>
 								<textarea name="about" th:text="${user.about}"
 									class="form-control" rows="5" id="about_field"
-									th:classappend="${#fields.hasErrors('about')?'is-invalid':''}"
+									th:Classappend="${#fields.hasErrors('about')?'is-invalid':''}"
 									placeholder="Enter about yourself"></textarea>
 
 								<div th:each="error : ${#fields.errors('about')}"
@@ -81,10 +84,11 @@
 							<div class="form-group form-check m-1">
 								<input type="checkbox" name="agreement"
 									th:checked="${user.agreement}"
-									th:classappend="${#fields.hasErrors('agreement')?'is-invalid':''}"
+									th:Classappend="${#fields.hasErrors('agreement')?'is-invalid':''}"
 									class="form-check-input" id="terms_field"> <label
 									class="form-check-label" for="terms_field">Accept terms
 									and conditions</label>
+
 
 								<div th:each="error : ${#fields.errors('agreement')}"
 									th:text="${error}" class="invalid-feedback"></div>
@@ -123,6 +127,7 @@
 				<form th:action="@{/process}" method="post" th:object="${formData}"
 					class="bg-white p-4 rounded shadow-lg bg-light">
 					<h3 class="text-center  ">Signup Here</h3>
+					
 					<div class="mb-3 form-group">
 						<label for="userName" class="form-label">User Name</label> <input
 							type="text" name="userName" class="form-control"
@@ -168,16 +173,17 @@
 
 						<div th:each="error : ${#fields.errors('agreed')}"
 							th:text="${error}" class="invalid-feedback"></div>
-					</div> -->
-					<div class="container text-center">
-						<button type="submit" class="btn btn-primary px-3">Submit</button>
-					</div>
-				</form>
+					    </div> 
+					    
+						<div class="container text-center">
+							<button type="submit" class="btn btn-primary px-3">Submit</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
-	</div>
-</body>
+	</body>
 </html>
 
 
- -->
+-->
