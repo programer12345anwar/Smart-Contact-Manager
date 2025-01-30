@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -24,19 +25,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotBlank
+    @NotBlank(message = "Name can not be empty")
     private String name;
 
     // @Size(min=5, max=12)
     // @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).*")
 
-    @NotBlank
+    @NotBlank(message = "password can not be empty")
     @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{5,12}", message="Password must be 5-12 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.")
     private String password;
 
     @Column(unique=true)
-    @NotBlank
-    @Pattern(regexp="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
+    @NotBlank(message = "email can not be empty")
+    @Pattern(regexp="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$",message = "insert valid email")
     private String email;
 
     
@@ -45,11 +46,50 @@ public class User {
     private boolean enabled;
 
     @Column(length=500)
-    @NotBlank
+    @NotBlank(message = "about can not be empty")
     @Size(min=5,max=200 , message="About must be 5-200 characters long")
     private String about;
+    
+    @AssertTrue(message = "you must accept the terms and conditions")
+    private boolean agreement;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy="user")
+    public boolean isAgreement() {
+		return agreement;
+	}
+
+
+	public void setAgreement(boolean agreement) {
+		this.agreement = agreement;
+	}
+
+
+	public User(int id, @NotBlank(message = "Name can not be empty") String name,
+			@NotBlank(message = "password can not be empty") @Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{5,12}", message = "Password must be 5-12 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.") String password,
+			@NotBlank(message = "email can not be empty") @Pattern(regexp = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$", message = "insert valid email") String email,
+			String imageUrl, String role, boolean enabled,
+			@NotBlank(message = "about can not be empty") @Size(min = 5, max = 200, message = "About must be 5-200 characters long") String about,
+			@AssertTrue(message = "you must accept the terms and conditions") boolean agreement,
+			List<Contact> contacts) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.password = password;
+		this.email = email;
+		this.imageUrl = imageUrl;
+		this.role = role;
+		this.enabled = enabled;
+		this.about = about;
+		this.agreement = agreement;
+		this.contacts = contacts;
+	}
+
+
+	public User(@AssertTrue(message = "you must accept the terms and conditions") boolean agreement) {
+		super();
+		this.agreement = agreement;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy="user")
     private List<Contact> contacts=new ArrayList<>();//since one user can have list of contacts ,also can take set
 
     public User() {
@@ -134,19 +174,11 @@ public class User {
     }
 
     @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", name='" + getName() + "'" +
-            ", password='" + getPassword() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", imageUrl='" + getImageUrl() + "'" +
-            ", role='" + getRole() + "'" +
-            ", enabled='" + isEnabled() + "'" +
-            ", about='" + getAbout() + "'" +
-            ", contacts='" + getContacts() + "'" +
-            "}";
-    }
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + ", imageUrl="
+				+ imageUrl + ", role=" + role + ", enabled=" + enabled + ", about=" + about + ", agreement=" + agreement
+				+ ", contacts=" + contacts + "]";
+	}
 
 
 
