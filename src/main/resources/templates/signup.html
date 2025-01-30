@@ -25,10 +25,14 @@
                             <!-- Name Field -->
                             <div class="form-group">
                                 <label for="name_field" class="form-label">Enter Your Name</label>
-                                <input name="name" th:value="${user.name}" type="text" class="form-control" id="name_field" placeholder="Enter here" required />
+                                <input name="name" th:value="${user.name}" type="text" class="form-control"
+                                th:classappend="${#fields.hasErrors('name')?'is-invalid':''}"
+                                id="name_field" placeholder="Enter here" required />
 
-                                <div id="validationServer03Feedback" class="invalid-feedback">
-                                    Please provide a valid city.
+                                <div  class="invalid-feedback"
+                                th:each="e:${#fields.errors('name')}" th:text="${e}"
+                                >
+                                    Please provide a your name.
                                   </div>
                             </div>
 
