@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
- 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -22,6 +22,9 @@ public class HomeController {
 
     @Autowired
     UserRepository userRepository;
+    
+    @Autowired
+    BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping("/")
     public String home(Model model){
@@ -88,6 +91,7 @@ public class HomeController {
         user.setRole("ROLE_USER");
         user.setEnabled(true);
         user.setImageUrl("default.png");
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         
         
         System.out.println("Agreement "+agreement);

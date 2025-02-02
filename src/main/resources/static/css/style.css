@@ -80,6 +80,10 @@ body {
     line-height: 1.5;
 }
 
+/* .banner2{
+	background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../images/banner1.avif);
+} */
+
 /* Card styling */
 .my-card {
     margin-top: 100px;

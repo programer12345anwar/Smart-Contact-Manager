@@ -18,7 +18,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
     
     @Id
@@ -31,13 +31,13 @@ public class User {
     // @Size(min=5, max=12)
     // @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).*")
 
-    @NotBlank(message = "password can not be empty")
-    @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{5,12}", message="Password must be 5-12 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.")
+    @NotBlank(message = "Password can not be empty")
+//    @Pattern(regexp="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{5,12}$",
+//             message="Password must be 5-12 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.")
     private String password;
 
-    @Column(unique=true)
-    @NotBlank(message = "email can not be empty")
-    @Pattern(regexp="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$",message = "insert valid email")
+    @Pattern(regexp="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", 
+            message="Insert a valid email")
     private String email;
 
     
@@ -64,7 +64,8 @@ public class User {
 
 
 	public User(int id, @NotBlank(message = "Name can not be empty") String name,
-			@NotBlank(message = "password can not be empty") @Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{5,12}", message = "Password must be 5-12 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.") String password,
+			@NotBlank(message = "password can not be empty")  @Pattern(regexp="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{5,12}$",
+            message="Password must be 5-12 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.") String password,
 			@NotBlank(message = "email can not be empty") @Pattern(regexp = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$", message = "insert valid email") String email,
 			String imageUrl, String role, boolean enabled,
 			@NotBlank(message = "about can not be empty") @Size(min = 5, max = 200, message = "About must be 5-200 characters long") String about,
@@ -184,3 +185,47 @@ public class User {
 
 
 }
+
+/* import lombok.*;
+
+@Entity
+@Table(name = "users")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @NotBlank(message = "Name can not be empty")
+    private String name;
+
+    @NotBlank(message = "Password can not be empty")
+    @Pattern(regexp="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{5,12}$",
+             message="Password must be 5-12 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.")
+    private String password;
+
+    @Column(unique=true)
+    @NotBlank(message = "Email can not be empty")
+    @Pattern(regexp="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message="Insert a valid email")
+    private String email;
+
+    private String imageUrl;
+    private String role;
+    private boolean enabled;
+
+    @Column(length=500)
+    @NotBlank(message = "About can not be empty")
+    @Size(min=5, max=200, message="About must be 5-200 characters long")
+    private String about;
+    
+    @AssertTrue(message = "You must accept the terms and conditions")
+    private boolean agreement;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="user")
+    private List<Contact> contacts = new ArrayList<>();
+}
+*/
