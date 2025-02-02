@@ -101,7 +101,7 @@ public class HomeController {
         System.out.println(result);
         model.addAttribute("user",result);
         session.setAttribute("message", new Message("Successfully registered !!","alert-success"));
-        return "signup";//signup.html
+        return "redirect:/signin"; // Redirect to signin page after successful registration
         
        }
        catch(Exception e){
@@ -123,6 +123,13 @@ public class HomeController {
     	
     }
 
+    // Handling the login POST request (make sure this method exists)
+ 
+
+}
+
+     
+
     //=============================================
     // @Autowired
     // private UserRepository userRepository;
@@ -143,4 +150,4 @@ public class HomeController {
     //     return "working";
     //}
     
-}
+

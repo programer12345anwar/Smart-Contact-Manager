@@ -44,36 +44,41 @@ public class MyConfig {
 																								// /admin/**
 				.requestMatchers("/user/**").hasRole("USER") // Only USER can access /user/**
 				.requestMatchers("/**").permitAll() // Public access for all other routes
-		).formLogin(form -> form // Use the default login page
-				.defaultSuccessUrl("/user/index", true).permitAll())
-				.logout(logout -> logout.logoutUrl("/logout").permitAll()).csrf(csrf -> csrf.disable()); // Disable CSRF
+		)
+		.formLogin(form -> form
+		.loginPage("/signin")  // Custom login page
+		.loginProcessingUrl("/perform_login")  // Ensure this matches the form action in `login.html`
+		.defaultSuccessUrl("/user/index", true)
+		.permitAll()
+	)
+		.logout(logout -> logout.logoutUrl("/logout").permitAll()).csrf(csrf -> csrf.disable()); // Disable CSRF
 																											// if
 																											// necessary
 
 		return http.build();
 	}
-
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http
-//            .authorizeHttpRequests(auth -> auth
-//                .requestMatchers("/admin/**").hasRole("ADMIN")  // Only ADMIN can access /admin/**
-//                .requestMatchers("/user/**").hasRole("USER")    // Only USER can access /user/**
-//                .requestMatchers("/**").permitAll()            // Public access for all other routes
-//            )
-//            .formLogin(form -> form
-//            	    .loginPage("/login")  // Custom login page
-//            	    .loginProcessingUrl("/perform_login")  // Ensure this matches the form action in `login.html`
-//            	    .defaultSuccessUrl("/user/index", true)
-//            	    .permitAll()
-//
-//            )
-//            .logout(logout -> logout
-//                .logoutUrl("/logout")
-//                .permitAll()
-//            )
-//            .csrf(csrf -> csrf.disable());  // Disable CSRF if necessary (use carefully)
-//
-//        return http.build();
-//    }
 }
+
+/*@Bean
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/admin/**").hasRole("ADMIN")  // Only ADMIN can access /admin/**
+            .requestMatchers("/user/**").hasRole("USER")    // Only USER can access /user/**
+            .requestMatchers("/**").permitAll()            // Public access for all other routes
+        )
+        .formLogin(form -> form
+            .loginPage("/login")  // Custom login page
+            .loginProcessingUrl("/perform_login")  // Ensure this matches the form action in `login.html`
+            .defaultSuccessUrl("/user/index", true)
+            .permitAll()
+        )
+        .logout(logout -> logout
+            .logoutUrl("/logout")
+            .permitAll()
+        )
+        .csrf(csrf -> csrf.disable());  // Disable CSRF if necessary (use carefully)
+
+    return http.build();
+}
+ */
