@@ -9,3 +9,13 @@ document.querySelector('.navbar-toggler').addEventListener('click', function () 
         navbarCollapse.style.maxHeight = '300px'; // Expand effect
     }
 });
+
+const toggleSidebar = () => {
+     if($('.sidebar').is(":visible")){
+        $('.sidebar').css("display","none");
+        $('.content').css("margin-left","0%");
+    }else{
+        $('.sidebar').css("display","block");
+        $('.content').css("margin-left","18%");
+    }
+};

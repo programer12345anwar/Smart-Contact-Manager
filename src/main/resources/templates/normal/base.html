@@ -18,13 +18,15 @@
     />
 
     <!-- Font Awesome for icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <!--th:href="@{}" we reached inside static folder-->
+
+    <!-- jQuery (required for the toggle function) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
     <title th:text="${title}">base html</title>
   </head>
@@ -73,17 +75,23 @@
     <!--this is body section-->
     <!--this is sidebar-->
       <div class="sidebar">
-         <a href="#" class="item">Home</a>
-         <a href="#" class="item">View Contacts</a>
-         <a href="#" class="item">Add Contacts</a>
-         <a href="#" class="item">Your Profile</a>
-         <a href="#" class="item">Settings</a>
-         <a href="#" class="item">Logout</a>
+
+        <span class="close-btn"><i 
+        onclick="toggleSidebar()" class="fas fa-times "></i></span>
+
+         <a href="#" class="item"><i class="fas fa-home"></i> Home </a>
+         <a href="#" class="item"><i class="fas fa-id-card-alt"></i> View Contacts  </a>
+         <a href="#" class="item"><i class="fas fa-pencil-alt"></i> Add Contacts  </a>
+         <a href="#" class="item"><i class="fas fa-user-circle"></i> Your Profile  </a>
+         <a href="#" class="item"><i class="fas fa-cogs"></i> Settings  </a>
+         <a href="#" class="item"><i class="fas fa-sign-out-alt"></i> Logout  </a>
+         <div class="divider"></div>
       </div>
     <!--end of the sidebar-->
 
     <!--content area-->
     <div class="content">
+       <i onclick="toggleSidebar()" class="fas fa-bars menu-btn "></i>
       <div th:replace="${content}"></div>
     </div>
     
