@@ -49,8 +49,9 @@ public class MyConfig {
             )
             .formLogin(login -> login
                 .loginPage("/signin") // Custom login page
-                .loginProcessingUrl("/login") // Spring Security handles POST /login
+                .loginProcessingUrl("/do_login") // Spring Security handles POST /login
                 .defaultSuccessUrl("/user/index", true) // Redirect after successful login
+                 //.failureUrl("/login-fail")
                 .permitAll()
             )
             .logout(logout -> logout

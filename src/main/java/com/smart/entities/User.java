@@ -90,7 +90,7 @@ public class User {
 		this.agreement = agreement;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy="user")
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy="user")
     private List<Contact> contacts=new ArrayList<>();//since one user can have list of contacts ,also can take set
 
     public User() {

@@ -37,6 +37,9 @@ body {
 
 .navbar-nav {
     margin-left: 0; /* Restore alignment to the left */
+    
+    
+    
 }
 
 .navbar-nav .nav-link {
@@ -44,7 +47,14 @@ body {
     padding: 10px;
     font-size: 1.1rem;
     text-align: left; /* Ensure left alignment of text */
+    transition: all 0.3s ease-in-out;
+    
+
 }
+.navbar-nav .nav-link:hover {
+    color: #f48624 !important;
+    transform: translateY(-3px); /* Moves the link 3px up */
+}   
 
 /* Banner styling */
 .banner {
@@ -142,3 +152,70 @@ body {
     margin-top: -85px;
     
   }
+
+  /*Sidebar styling */
+  /* Sidebar styling */
+.sidebar {
+    width: 18%;
+    height: 100vh;
+    background: #009688 !important; 
+    /* background-color: #f8f9fa; */
+    position: fixed;
+    top: 56px; /* Adjust for navbar height */
+    left: 0;
+    overflow-y: auto; /* Enable vertical scrolling */
+    box-sizing: border-box; /* Include padding in height/width */
+     padding-top: 20px;
+}
+
+/* Content area */
+.content {
+    margin-left: 18%; /* Adjust according to sidebar width */
+    padding: 20px;
+    min-height: 100vh;
+    overflow-y: auto; /* Allow scrolling if content is long */
+    background-color: #ffffff; /* Optional: Better contrast */
+}
+
+
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    position: relative; /* Needed for pseudo-elements */
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effects */
+.sidebar a:hover {
+    background-color: #f1f1f1;
+    color: #009688;
+    transform: translateX(2px); /* Moves the link slightly to the right */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Adds subtle shadow */
+}
+
+/* Left border animation effect */
+.sidebar a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0px;
+    height: 100%;
+    background-color: #009688;
+    transform: scaleY(0); /* Initially hidden */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Show left border on hover */
+.sidebar a:hover::before {
+    transform: scaleY(1); /* Expands border */
+}
+
+
+   
+
+
