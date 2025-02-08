@@ -2,8 +2,10 @@ package com.smart.controller;
 
 import java.security.Principal;
 
+import com.smart.entities.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.smart.entities.User;
@@ -18,11 +20,10 @@ public class UserController {
 
 	@Autowired
 	private UserRepository userRepository;
-	
 
-	//@Transactional
-	 @RequestMapping("/index")
-	public String dashboard(Model model, Principal principal) {
+	//method for adding comman data to the response
+    @ModelAttribute
+    public void addCommonData(Model model,Principal principal) {
 		System.out.println("user dashboard is opened");
 		String userName=principal.getName();//it will give email
 		System.out.println("USER NAME: "+userName);
@@ -32,10 +33,27 @@ public class UserController {
 		User user=userRepository.getUserByEmail(userName);
 		System.out.println("user "+user);//to string method of User will be called
 		model.addAttribute("user",user);
-		
-		
-		return "/normal/user_dashboard";//user_dashboard.html 
+    }
+	//dashboard home
+	//@Transactional
+	 @RequestMapping("/index")
+	public String dashboard(Model model, Principal principal) {
+
+		return "/normal/user_dashboard";//user_dashboard.html
 	}
+
+
+    //open add form handler
+
+    @RequestMapping("/add-contact")
+    public String openAddContactForm(Model model){
+
+        System.out.println("open add contact form");
+		model.addAttribute("title", "Add Contact");
+		//add new contact object to the model to be used in form
+		model.addAttribute("contact", new Contact());//add new contact object to the model to be used in form
+        return "normal/add_contact_form";
+    }
 	  
 
 }
